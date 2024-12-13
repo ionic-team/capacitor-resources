@@ -1,22 +1,22 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { mkdirp, pathExists, writeFile } from '@ionic/utils-fs';
-import { dirname, join, relative } from 'path';
-import type { OutputInfo, Sharp } from 'sharp';
+import {mkdirp, pathExists, writeFile} from '@ionic/utils-fs';
+import {dirname, join, relative} from 'path';
+import type {OutputInfo, Sharp} from 'sharp';
 import sharp from 'sharp';
 
-import type { AssetGeneratorOptions } from '../../asset-generator';
-import { AssetGenerator } from '../../asset-generator';
+import type {AssetGeneratorOptions} from '../../asset-generator';
+import {AssetGenerator} from '../../asset-generator';
 import type {
   AndroidOutputAssetTemplate,
   AndroidOutputAssetTemplateAdaptiveIcon,
   AndroidOutputAssetTemplateSplash,
 } from '../../definitions';
-import { AssetKind, Platform } from '../../definitions';
-import { BadPipelineError, BadProjectError } from '../../error';
-import type { InputAsset } from '../../input-asset';
-import { OutputAsset } from '../../output-asset';
-import type { Project } from '../../project';
-import { warn } from '../../util/log';
+import {AssetKind, Platform} from '../../definitions';
+import {BadPipelineError, BadProjectError} from '../../error';
+import type {InputAsset} from '../../input-asset';
+import {OutputAsset} from '../../output-asset';
+import type {Project} from '../../project';
+import {warn} from '../../util/log';
 
 import * as AndroidAssetTemplates from './assets';
 
@@ -118,11 +118,7 @@ export class AndroidAssetGenerator extends AssetGenerator {
     asset: InputAsset,
     pipe: Sharp,
   ): Promise<OutputAsset[]> {
-    // Current versions of Android don't appear to support night mode icons (13+ might?)
-    // so, for now, we only generate light mode ones
-    if (asset.kind === AssetKind.LogoDark) {
-      return [];
-    }
+    const isNightMode = asset.kind !== AssetKind.Logo;
 
     // Create the background pipeline for the generated icons
     const backgroundPipe = sharp({
@@ -131,14 +127,15 @@ export class AndroidAssetGenerator extends AssetGenerator {
         height: asset.height!,
         channels: 4,
         background:
-          asset.kind === AssetKind.Logo
-            ? this.options.iconBackgroundColor ?? '#ffffff'
-            : this.options.iconBackgroundColorDark ?? '#111111',
+          isNightMode
+            ? this.options.iconBackgroundColorDark ?? '#111111'
+            : this.options.iconBackgroundColor ?? '#ffffff',
       },
     });
 
+    const adaptiveIconKind = isNightMode ? AssetKind.AdaptiveIconDark : AssetKind.AdaptiveIcon;
     const icons = Object.values(AndroidAssetTemplates).filter(
-      (a) => a.kind === AssetKind.AdaptiveIcon,
+      (a) => a.kind === adaptiveIconKind,
     ) as AndroidOutputAssetTemplateAdaptiveIcon[];
 
     const backgroundImages = await Promise.all(

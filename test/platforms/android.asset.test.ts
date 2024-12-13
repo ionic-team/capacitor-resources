@@ -1,4 +1,4 @@
-import { copy, pathExists, readdirp, readFile, rmSync as rm, statSync } from '@ionic/utils-fs';
+import { copy, pathExists, rmSync as rm } from '@ionic/utils-fs';
 import tempy from 'tempy';
 import sharp from 'sharp';
 import { join } from 'path';
@@ -7,12 +7,10 @@ import { Context, loadContext } from '../../src/ctx';
 import {
   AndroidOutputAssetTemplate,
   AndroidOutputAssetTemplateAdaptiveIcon,
-  AssetKind,
   Assets,
 } from '../../src/definitions';
 import { OutputAsset } from '../../src/output-asset';
 import { AndroidAssetGenerator } from '../../src/platforms/android';
-import * as AndroidAssets from '../../src/platforms/android/assets';
 
 describe('Android asset test', () => {
   let ctx: Context;
@@ -187,7 +185,7 @@ describe('Android Asset Test - Logo Only', () => {
     let generatedAssets = ((await assets.logoDark?.generate(strategy, ctx.project)) ??
       []) as OutputAsset<AndroidOutputAssetTemplate>[];
 
-    expect(generatedAssets.length).toBe(13);
+    expect(generatedAssets.length).toBe(25);
     await verifySizes(generatedAssets);
   });
 
