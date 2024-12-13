@@ -30,6 +30,7 @@ export const enum AssetKind {
   Logo = 'logo',
   LogoDark = 'logo-dark',
   AdaptiveIcon = 'adaptive-icon',
+  AdaptiveIconDark = 'adaptive-icon-dark',
   Icon = 'icon',
   IconForeground = 'icon-foreground',
   IconBackground = 'icon-background',
