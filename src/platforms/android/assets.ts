@@ -60,6 +60,54 @@ export const ANDROID_XXXHDPI_ICON: AndroidOutputAssetTemplate = {
 };
 
 /**
+ * Notification icons
+ */
+export const ANDROID_NOTIFICATION_MDPI_ICON: AndroidOutputAssetTemplate = {
+  platform: Platform.Android,
+  kind: AssetKind.NotificationIcon,
+  format: Format.Png,
+  width: 24,
+  height: 24,
+  density: AndroidDensity.Mdpi,
+};
+
+export const ANDROID_NOTIFICATION_HDPI_ICON: AndroidOutputAssetTemplate = {
+  platform: Platform.Android,
+  kind: AssetKind.NotificationIcon,
+  format: Format.Png,
+  width: 36,
+  height: 36,
+  density: AndroidDensity.Hdpi,
+};
+
+export const ANDROID_NOTIFICATION_XHDPI_ICON: AndroidOutputAssetTemplate = {
+  platform: Platform.Android,
+  kind: AssetKind.NotificationIcon,
+  format: Format.Png,
+  width: 48,
+  height: 48,
+  density: AndroidDensity.Xhdpi,
+};
+
+export const ANDROID_NOTIFICATION_XXHDPI_ICON: AndroidOutputAssetTemplate = {
+  platform: Platform.Android,
+  kind: AssetKind.NotificationIcon,
+  format: Format.Png,
+  width: 72,
+  height: 72,
+  density: AndroidDensity.Xxhdpi,
+};
+
+export const ANDROID_NOTIFICATION_XXXHDPI_ICON: AndroidOutputAssetTemplate = {
+  platform: Platform.Android,
+  kind: AssetKind.NotificationIcon,
+  format: Format.Png,
+  width: 144,
+  height: 144,
+  density: AndroidDensity.Xxxhdpi,
+};
+
+/**
  * Adaptive icons
  */
 export const ANDROID_LDPI_ADAPTIVE_ICON: AndroidOutputAssetTemplateAdaptiveIcon = {

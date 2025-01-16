@@ -144,10 +144,18 @@ export interface PwaOutputAssetTemplate extends OutputAssetTemplate {
 export interface AndroidOutputAssetTemplate extends OutputAssetTemplate {
   density: AndroidDensity;
 }
+
+export interface AndroidNotificationTemplate extends AndroidOutputAssetTemplate {
+  kind: AssetKind.NotificationIcon;
+  width: number;
+  height: number;
+}
+
 export interface AndroidOutputAssetTemplateSplash extends OutputAssetTemplate {
   density: AndroidDensity;
   orientation: Orientation;
 }
+
 export interface AndroidOutputAssetTemplateAdaptiveIcon extends OutputAssetTemplate {
   density: AndroidDensity;
 }
