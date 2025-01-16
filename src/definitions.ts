@@ -142,7 +142,7 @@ export interface PwaOutputAssetTemplate extends OutputAssetTemplate {
 }
 
 export interface AndroidOutputAssetTemplate extends OutputAssetTemplate {
-  density?: AndroidDensity;
+  density: AndroidDensity;
 }
 
 export interface AndroidNotificationTemplate extends AndroidOutputAssetTemplate {
